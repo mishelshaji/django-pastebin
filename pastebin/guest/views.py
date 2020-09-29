@@ -11,7 +11,7 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-def login(request):
+def user_login(request):
     if request.method == "GET":
         # return render(request, 'login.html', {'form': AuthenticationForm()})
         return render(request, 'login.html', {'form': LoginForm()})
@@ -24,7 +24,8 @@ def login(request):
 
         user = authenticate(username=username, password=password)
         if user:
-            return HttpResponse("User Exists")
+            login(request, user)
+            return redirect('user_home')
         return render(request, 'login.html', {'form': lf, 'message': 'Invalid username or password'})
         
     return render(request, 'login.html', {'form': lf})
