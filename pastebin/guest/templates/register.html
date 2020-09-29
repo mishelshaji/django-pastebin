@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Register</title>
+{% endblock meta %}
+
+{% block content %}
+    <h1 class="text-center">Register</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+                <form method="post">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <button class="btn btn-info btn-block" type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .errorlist{
+            background-color: #f3eeee;
+            color: #ff0000;
+            list-style-type: none;
+        }
+    </style>
+    <script>
+        document.querySelectorAll('input').forEach(e=>{
+            e.classList.add('form-control');
+        })
+    </script>
+{% endblock content %}
+    
+    
