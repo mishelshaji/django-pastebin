@@ -1,6 +1,5 @@
 from django.forms import (
     Form,
-    TextInput,
     PasswordInput,
     CharField,
     EmailInput,
