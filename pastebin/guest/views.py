@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .forms import LoginForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, authenticate
 
 # Create your views here.
 def home(request):
@@ -15,10 +16,17 @@ def login(request):
         # return render(request, 'login.html', {'form': AuthenticationForm()})
         return render(request, 'login.html', {'form': LoginForm()})
     
-    # print(request.POST.get('email'))
+    # print(request.POST.get('username'))
     lf = LoginForm(request.POST)
     if lf.is_valid():
-        return HttpResponse("Welcome")
+        username = lf.cleaned_data['username']
+        password = lf.cleaned_data['password']
+
+        user = authenticate(username=username, password=password)
+        if user:
+            return HttpResponse("User Exists")
+        return render(request, 'login.html', {'form': lf, 'message': 'Invalid username or password'})
+        
     return render(request, 'login.html', {'form': lf})
 
 def register(request):

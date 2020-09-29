@@ -12,6 +12,13 @@
                 <form method="post">
                     {{ form.as_p }}
                     {% csrf_token %}
+                    
+                    {% if message %}
+                        <div class="alert alert-danger">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                        
                     <button class="btn btn-info btn-block" type="submit">Login</button>
                 </form>
             </div>

@@ -2,23 +2,23 @@ from django.forms import (
     Form,
     PasswordInput,
     CharField,
-    EmailInput,
+    TextInput,
 )
-from django.core.validators import EmailValidator, MinLengthValidator, MaxLengthValidator
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 
 class LoginForm(Form):
-    email = CharField(
-        label="Email ID",
-        widget=EmailInput(
+    username = CharField(
+        label="Username",
+        widget=TextInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'someone@example.com'
+                'placeholder': 'johndoe'
             }
         ),
         required=True, # Default is True
         validators=[
-            EmailValidator("Invalid email")
+            MinLengthValidator(3)
         ]
     )
 
