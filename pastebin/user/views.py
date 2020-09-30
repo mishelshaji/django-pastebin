@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import PostCreationForm
@@ -11,4 +11,15 @@ def home(request):
 
 @login_required
 def new_post(request):
-    return render(request, 'user_new_post.html', {'form': PostCreationForm()})
+    if request.method == "GET":
+        return render(request, 'user_new_post.html', {'form': PostCreationForm()})
+    
+    pcf = PostCreationForm(request.POST)
+    if pcf.is_valid():
+        # print(request.user.id)
+        post = pcf.save(commit=False)
+        post.created_by = request.user
+
+        post.save()
+        return redirect('user_home')
+    return render(request, 'user_new_post.html', {'form': pcf})

@@ -29,13 +29,16 @@ class Post(models.Model):
     post_type = models.CharField(
         verbose_name="Post type",
         max_length=20,
-        choices=POST_TYPE
+        choices=POST_TYPE,
+        default='public'
     )
 
     password = models.CharField(
         verbose_name="Password",
         max_length=25,
-        help_text="Leave it blank to make the post public"
+        help_text="Leave it blank to make the post public",
+        blank=True,
+        null=True
     )
 
     created_on = models.DateTimeField(

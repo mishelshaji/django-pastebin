@@ -6,10 +6,19 @@
 
 {% block content %}
     <h2 class="text-center">New Post</h2>
-    <form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-    </form>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+                <form method="post">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success btn-block">Publish</button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
+
+    
     
     
