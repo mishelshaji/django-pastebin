@@ -1,11 +1,51 @@
 {% extends 'user_base.html' %}
 
 {% block meta %}
-    <title>User Dashboard</title>
+<title>User Dashboard</title>
 {% endblock meta %}
 
 {% block content %}
-    <h2 class="text-center">User Homepage</h2>
+<h2 class="text-center">User Homepage</h2>
+
+<div class="container">
+    {% if data %}
+
+    
+    {% for d in data %}
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse"
+                        data-target="#collapse{{ d.id }}" aria-expanded="false" aria-controls="collapseTwo">
+                        {{ d.title }}
+                        
+                        {% if d.post_type == 'public' %}
+                            <span class="badge badge-primary">Public</span>
+                        {% else %}
+                            <span class="badge badge-danger">Private</span>
+                        {% endif %}
+                            
+                    </button>
+                </h2>
+            </div>
+            <div id="collapse{{ d.id }}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                    <pre>
+                        {{ d.body }}
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+        
+
+    {% else %}
+    <div class="alert alert-success">
+        You made no public or private posts. Once you share posts, it wil appear here.
+    </div>
+    {% endif %}
+
+</div>
 {% endblock content %}
-    
-    
