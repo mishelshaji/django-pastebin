@@ -7,7 +7,7 @@ from .models import Post
 # Create your views here.
 @login_required
 def home(request):
-    data = Post.objects.filter(created_by=request.user)
+    data = Post.objects.filter(created_by=request.user).order_by('-created_on')
     return render(request, 'user_home.html', {'data': data})
 
 @login_required

@@ -10,7 +10,6 @@
 <div class="container">
     {% if data %}
 
-    
     {% for d in data %}
     <div class="accordion" id="accordionExample">
         <div class="card">
@@ -19,27 +18,26 @@
                     <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse"
                         data-target="#collapse{{ d.id }}" aria-expanded="false" aria-controls="collapseTwo">
                         {{ d.title }}
-                        
+
                         {% if d.post_type == 'public' %}
-                            <span class="badge badge-primary">Public</span>
+                        <span class="badge badge-primary">Public</span>
                         {% else %}
-                            <span class="badge badge-danger">Private</span>
+                        <span class="badge badge-danger">Private</span>
                         {% endif %}
-                            
                     </button>
                 </h2>
             </div>
             <div id="collapse{{ d.id }}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                 <div class="card-body">
-                    <pre>
+                    <div class="post-body">
                         {{ d.body }}
-                    </pre>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     {% endfor %}
-        
+
 
     {% else %}
     <div class="alert alert-success">
@@ -48,4 +46,15 @@
     {% endif %}
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/showdown@1.9.0/dist/showdown.min.js"></script>
+<script>
+    var converter = new showdown.Converter();
+
+    document.querySelectorAll('.post-body').forEach(e => {
+        text = e.innerText.trim();
+        html = converter.makeHtml(text)
+        e.innerHTML = html;
+    });
+</script>
 {% endblock content %}
