@@ -24,3 +24,9 @@ def new_post(request):
         post.save()
         return redirect('user_home')
     return render(request, 'user_new_post.html', {'form': pcf})
+
+@login_required
+def delete_post(request, id):
+    if request.method == "GET":
+        Post.objects.get(pk=id).delete()
+        return redirect('user_home')
