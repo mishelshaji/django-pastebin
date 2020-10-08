@@ -1,9 +1,11 @@
 from django.contrib.auth.decorators import login_required
+from django.forms.widgets import Select
 from django.http import request
 from django.shortcuts import render, HttpResponse, redirect
 from .forms import LoginForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate, logout
+from user.models import Post
 
 # Create your views here.
 def home(request):
@@ -46,3 +48,17 @@ def register(request):
 def logout_user(request):
     logout(request)
     return redirect('login')
+
+def search(request):
+    q = request.GET.get('s')
+    if q:
+        posts = Post.objects.filter(title__contains=q)
+        if posts:
+            pass
+
+        res = {
+            "message": f"No results found for {q}",
+        }
+        return render(request, 'search.html', res)
+        
+    return render(request, 'search.html')

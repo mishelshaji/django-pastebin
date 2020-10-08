@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Search</title>
+{% endblock meta %}
+
+{% block content %}
+    <div class="container-fluid" id="search">
+        <h1 class="text-center mb-5">Search public posts</h1>
+        <form method="get" class="d-flex">
+            <input type="search" class="form-control mr-5" name="s" id="s" required placeholder="Enter title">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+
+    
+    {% if message %}
+        {{ message }}
+    {% endif %}
+        
+{% endblock content %}
+    
+    

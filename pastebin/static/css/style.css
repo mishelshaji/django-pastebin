@@ -1,0 +1,9 @@
+#search{
+    background-image: url(../images/search-bg.png);
+    padding: 25vh;
+}
+
+#search form{
+    padding: 0 30%;
+    justify-content: center;
+}
