@@ -28,5 +28,7 @@ def new_post(request):
 @login_required
 def delete_post(request, id):
     if request.method == "GET":
-        Post.objects.get(pk=id).delete()
+        p = Post.objects.filter(id=id, created_by=request.user)
+        if p:
+            p[0].delete()
         return redirect('user_home')
