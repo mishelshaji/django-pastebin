@@ -1,7 +1,9 @@
+from django.contrib.auth.decorators import login_required
+from django.http import request
 from django.shortcuts import render, HttpResponse, redirect
 from .forms import LoginForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 
 # Create your views here.
 def home(request):
@@ -39,3 +41,8 @@ def register(request):
     if ucf.is_valid():
         ucf.save()
         return redirect('login')
+
+@login_required
+def logout_user(request):
+    logout(request)
+    return redirect('login')
