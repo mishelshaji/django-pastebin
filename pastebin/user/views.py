@@ -1,3 +1,4 @@
+from django.http.response import HttpResponseNotFound
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -31,4 +32,21 @@ def delete_post(request, id):
         p = Post.objects.filter(id=id, created_by=request.user)
         if p:
             p[0].delete()
+        return redirect('user_home')
+
+@login_required
+def edit_post(request, id):
+    p = Post.objects.filter(id=id, created_by=request.user)
+    if p is None:
+        return HttpResponseNotFound()
+
+    if request.method == "GET":
+        print(p[0])
+        pcf = PostCreationForm(instance=p[0])
+        return render(request, 'user_edit_post.html', {'form': pcf})
+        
+    # If the request method id POST
+    pcf = PostCreationForm(data = request.POST, instance=p[0])
+    if pcf.is_valid():
+        pcf.save()
         return redirect('user_home')
