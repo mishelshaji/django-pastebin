@@ -70,3 +70,6 @@ def search(request):
         return render(request, 'search.html', res)
         
     return render(request, 'search.html')
+
+def view_post(request, id):
+    return HttpResponse(f"Displaying serach result for {id}")

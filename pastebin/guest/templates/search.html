@@ -27,6 +27,7 @@
             {% for p in posts %}
                 <li class="list-group-item">
                     {{ p.title }}
+                    <a href="{% url 'blog' id=p.id %}" style="float: right;" class="fa fa-eye btn btn-primary"></a>
                 </li>
             {% endfor %}     
         </ul>

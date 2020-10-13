@@ -8,4 +8,5 @@ urlpatterns = [
     path('logout/', logout_user, name="logout"),
     path('register/', register, name="register"),
     path('search/', search, name="search"),
+    path('blog/<int:id>', view_post, name="blog"),
 ]
