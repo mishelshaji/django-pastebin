@@ -7,6 +7,7 @@ from .forms import LoginForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate, logout
 from user.models import Post
+from markdown import Markdown
 
 # Create your views here.
 def home(request):
@@ -75,6 +76,8 @@ def search(request):
 def view_post(request, id):
     try:
         post = Post.objects.get(pk=id)
-        return render(request, 'post.html', {'data': post})
+        md = Markdown()
+        html = md.convert(post.body)
+        return render(request, 'post.html', {'data': post, 'rendered_post': html})
     except:
         return HttpResponseNotFound()
