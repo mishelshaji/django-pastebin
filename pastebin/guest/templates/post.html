@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>{{ data.title }}</title>
+{% endblock meta %}
+
+{% block content %}
+
+    <div class="container">
+        <h1 class="text-center">{{ data.title }}</h1>
+        <article id="post-body">
+            {{ data.body }}
+        </article>
+    </div>
+        
+{% endblock content %}
+
+
+{% block footer %}
+    <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.0/dist/showdown.min.js"></script>
+    <script>
+        var converter = new showdown.Converter();
+        var target = document.getElementById('post-body');
+        var text = target.innerText;
+        var html = converter.makeHtml(text);
+        target.innerHTML = html;
+    </script>
+{% endblock footer %}
+    
+    

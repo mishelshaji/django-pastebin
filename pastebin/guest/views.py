@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.forms.widgets import Select
 from django.http import request
+from django.http.response import HttpResponseNotFound
 from django.shortcuts import render, HttpResponse, redirect
 from .forms import LoginForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -72,4 +73,8 @@ def search(request):
     return render(request, 'search.html')
 
 def view_post(request, id):
-    return HttpResponse(f"Displaying serach result for {id}")
+    try:
+        post = Post.objects.get(pk=id)
+        return render(request, 'post.html', {'data': post})
+    except:
+        return HttpResponseNotFound()
