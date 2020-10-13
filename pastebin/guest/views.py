@@ -53,8 +53,16 @@ def search(request):
     q = request.GET.get('s')
     if q:
         posts = Post.objects.filter(title__contains=q)
+        # print(posts)
+
+        total_posts = len(posts)
         if posts:
-            pass
+            res = {
+                'query': q,
+                'total_posts': total_posts,
+                'posts': posts[:50],
+            }
+            return render(request, 'search.html', res)
 
         res = {
             "message": f"No results found for {q}",

@@ -14,13 +14,22 @@
     </div>
 
     
-<section id="search-result">
+<section id="search-result" class="container">
     {% if message %}
-        <div class="container">
-            <div class="alert alert-danger text-center">
-                <b>{{ message }}</b>
-            </div>
+        <div class="alert alert-danger text-center">
+             <b>{{ message }}</b>
         </div>
+    {% else %}
+
+        <h1 class="text-center mt-5">Showing results for "{{ query }}"</h1>
+        <p>Total results found: {{ total_posts }}</p>
+        <ul class="list-group">
+            {% for p in posts %}
+                <li class="list-group-item">
+                    {{ p.title }}
+                </li>
+            {% endfor %}     
+        </ul>
     {% endif %}
 </section>
         
