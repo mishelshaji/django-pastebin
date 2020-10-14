@@ -49,5 +49,13 @@ class Post(models.Model):
         to=User,
         on_delete=models.CASCADE,
     )
+
+    featured_image = models.ImageField(
+        verbose_name="Featured Image",
+        upload_to = 'images',
+        null=True,
+        default=None
+    )
+
     def __str__(self):
         return self.title
