@@ -20,6 +20,13 @@ class Post(models.Model):
         blank=False
     )
 
+    featured_image = models.ImageField(
+        verbose_name="Featured Image",
+        upload_to = 'images',
+        null=True,
+        default=None
+    )
+
     body = models.TextField(
         verbose_name="Content",
         blank=False,
@@ -48,13 +55,6 @@ class Post(models.Model):
     created_by = models.ForeignKey(
         to=User,
         on_delete=models.CASCADE,
-    )
-
-    featured_image = models.ImageField(
-        verbose_name="Featured Image",
-        upload_to = 'images',
-        null=True,
-        default=None
     )
 
     def __str__(self):

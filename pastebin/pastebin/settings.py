@@ -126,3 +126,9 @@ STATICFILES_DIRS = (
 STATIC_URL = '/static/'
 
 LOGIN_URL = '/login'
+
+# Base url to serve media files
+MEDIA_URL = '/content/'
+
+# Path where media is stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads/')

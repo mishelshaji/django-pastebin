@@ -16,7 +16,7 @@ def new_post(request):
     if request.method == "GET":
         return render(request, 'user_new_post.html', {'form': PostCreationForm()})
     
-    pcf = PostCreationForm(request.POST)
+    pcf = PostCreationForm(request.POST, request.FILES)
     if pcf.is_valid():
         # print(request.user.id)
         post = pcf.save(commit=False)
