@@ -51,7 +51,8 @@ def edit_post(request, id):
         return render(request, 'user_edit_post.html', {'form': pcf})
         
     # If the request method id POST
-    pcf = PostCreationForm(data = request.POST, instance=p[0])
+    pcf = PostCreationForm(data = request.POST, files= request.FILES, instance=p[0])
     if pcf.is_valid():
         pcf.save()
         return redirect('user_home')
+    return render(request, 'user_edit_post.html', {'form': pcf})
