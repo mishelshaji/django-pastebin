@@ -17,7 +17,7 @@
         </div>
         <div style="background-color: #eeeeee; padding: 10px; border-radius: 5px; border: 1px solid #c3c3c3;" class="mt-5">
         <b class="fa fa-user"> Published By: </b>{{ data.created_by }} | 
-        <b class="fa fa-clock-o"> On: </b> {{ data.created_on }}
+        <b class="fa fa-clock-o"> On: </b> {{ data.created_on|timesince }} ago
         </div>
         <article id="post-body" class="mt-5">          
             {% autoescape off %}
