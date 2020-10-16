@@ -7,11 +7,15 @@
 {% block content %}
 
     <div class="container">
-        <h1 class="text-center">{{ data.title }}</h1>
-        <div class="img-fluid">
-            <img src="{{ MEDIA_URL  }}/{{ data.featured_image }}" alt="">
+        <div class="row mt-5">
+            <div class="col-sm-6">
+                <h1 class="text-center">{{ data.title }}</h1>
+            </div>
+            <div class="col-sm-6">
+                <img src="{{ data.featured_image.url }}" alt="">
+            </div>
         </div>
-        <article id="post-body">          
+        <article id="post-body" class="mt-5">          
             {% autoescape off %}
                 {{ rendered_post }}    
             {% endautoescape %}   
