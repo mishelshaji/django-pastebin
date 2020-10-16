@@ -8,5 +8,31 @@
 
 {% block content %}
     <h1 class="text-center">My Homepage</h1>
+
+    
+    <div class="container">
+        <div class="row">
+            {% for d in data %}
+                <div class="col-sm-4">
+                    <div class="card mb-5" style="width: 18rem;">
+                        
+                        {% if d.featured_image %}
+                            <img src="{{ d.featured_image.url }}" class="card-img-top" alt="...">
+
+                        {% else %}
+                            <img src="http://fakeimg.pl/200x150?text=Post&font=lobster" alt="">
+                        {% endif %}
+                            
+                        <div class="card-body">
+                          <h5 class="card-title">{{ d.title }}</h5>
+                          <p class="card-text">{{ d.body|truncatewords:15 }}</p>
+                          <a href="{% url 'blog' id=d.id %}" class="btn btn-primary">Read more...</a>
+                        </div>
+                      </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+        
 {% endblock content %}
     

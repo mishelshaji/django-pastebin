@@ -11,8 +11,8 @@ from markdown import Markdown
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
-
+    data = Post.objects.all().order_by('-created_on')[:30]
+    return render(request, 'home.html', {'data': data})
 
 def about(request):
     return render(request, 'about.html')
